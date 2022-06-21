@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.*?>
+<VBox alignment="CENTER" spacing="20.0" style="-fx-background-color: #949398FF; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.doseq.musicplayer.MusicPlayerController">
+   <AnchorPane prefHeight="394.0" prefWidth="822.0" style="-fx-background-color: #949398FF; -fx-background-radius: 20;">
+      <children>
+         <Label fx:id="songLabel" alignment="CENTER" layoutX="2.0" layoutY="14.0" prefHeight="27.0" prefWidth="818.0" style="-fx-background-insets: 3;" text="TRACK NAME" textFill="WHITE">
+            <font>
+               <Font name="Arial" size="23.0" />
+            </font>
+         </Label>
+         <Slider fx:id="volumeSlider" layoutX="204.0" layoutY="87.0" value="50.0" />
+         <FontIcon fx:id="playButton" fill="WHITE" iconLiteral="bi-play" iconSize="32" layoutX="14.0" layoutY="115.0" onMouseClicked="#playMedia">
+            <cursor>
+               <Cursor fx:constant="CROSSHAIR" />
+            </cursor></FontIcon>
+         <FontIcon fx:id="pauseButton" iconColor="WHITE" iconLiteral="bi-pause" iconSize="32" layoutX="46.0" layoutY="115.0" onMouseClicked="#pauseMedia" />
+         <FontIcon fx:id="resetButton" iconColor="WHITE" iconLiteral="bi-stop" iconSize="32" layoutX="78.0" layoutY="115.0" onMouseClicked="#resetMedia" />
+         <FontIcon fx:id="nextButton" iconColor="WHITE" iconLiteral="bi-chevron-double-right" iconSize="24" layoutX="141.0" layoutY="111.0" onMouseClicked="#nextMedia" />
+         <FontIcon fx:id="previousButton" iconColor="WHITE" iconLiteral="bi-chevron-double-left" iconSize="24" layoutX="117.0" layoutY="111.0" onMouseClicked="#previousMedia" />
+         <FontIcon fx:id="muteButton" iconColor="WHITE" iconLiteral="bi-volume-down" iconSize="32" layoutX="172.0" layoutY="115.0" onMouseClicked="#muteMedia" />
+         <Label fx:id="timeLabel" alignment="CENTER" layoutX="659.0" layoutY="90.0" prefHeight="18.0" prefWidth="158.0" text="00:00:00 / 00:00:00" textFill="WHITE" />
+         <Slider fx:id="mediaSlider" layoutX="5.0" layoutY="55.0" prefHeight="24.0" prefWidth="810.0" />
+         <FontIcon fx:id="exitButton" iconColor="WHITE" iconLiteral="bi-x" iconSize="20" layoutX="789.0" layoutY="24.0" onMouseClicked="#exitPlayer" wrappingWidth="17.5999755859375">
+            <cursor>
+               <Cursor fx:constant="MOVE" />
+            </cursor></FontIcon>
+         <Separator layoutX="20.0" layoutY="126.0" prefHeight="0.0" prefWidth="782.0" />
+         <ListView fx:id="trackList" layoutX="20.0" layoutY="183.0" prefHeight="153.0" prefWidth="782.0" />
+         <Label layoutX="24.0" layoutY="150.0" text="Tracks:" textFill="WHITE" />
+         <FontIcon iconColor="WHITE" iconLiteral="bi-folder2-open" iconSize="24" layoutX="738.0" layoutY="380.0" onMouseClicked="#loadFilesByDirectory" />
+         <FontIcon iconColor="WHITE" iconLiteral="bi-plus-circle" iconSize="24" layoutX="774.0" layoutY="380.0" onMouseClicked="#loadSingleFile" />
+      </children>
+   </AnchorPane>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</VBox>

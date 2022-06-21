@@ -1,0 +1,6 @@
+.track {
+    -fx-control-inner-background: white;
+}
+.ikonli-font-icon:hover {
+    -fx-icon-color: black;
+}
