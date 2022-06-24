@@ -53,23 +53,27 @@ public class MusicPlayerController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {}
 
     public void playMedia() {
+        checkIfMediaPresent();
         if(mediaPlayer == null) loadMedia(songNumber);
-        beginTimer();
-        mediaPlayer.play();
+            beginTimer();
+            mediaPlayer.play();
     }
 
     public void pauseMedia() {
+        checkIfMediaPresent();
         cancelTimer();
         mediaPlayer.pause();
     }
 
     public void resetMedia() {
+        checkIfMediaPresent();
         mediaSlider.setValue(0);
         mediaPlayer.seek(Duration.seconds(0));
         pauseMedia();
     }
 
     public void nextMedia() {
+        checkIfMediaPresent();
         if(songNumber< mediaReferenceList.size()-1){
             setMedia(++songNumber);
         } else {
@@ -79,6 +83,7 @@ public class MusicPlayerController implements Initializable {
     }
 
     public void previousMedia() {
+        checkIfMediaPresent();
         if(songNumber>0){
             setMedia(--songNumber);
         } else {
@@ -88,6 +93,7 @@ public class MusicPlayerController implements Initializable {
     }
 
     public void muteMedia() {
+        checkIfMediaPresent();
         isMuted = !isMuted;
         mediaPlayer.setMute(isMuted);
         if(isMuted) {
@@ -130,11 +136,13 @@ public class MusicPlayerController implements Initializable {
 
     public void loadFilesByDirectory() {
         List<File> loadedFiles = FileLoader.loadFilesInDirectory();
-        mediaReferenceList.addAll(loadedFiles);
-        trackList.getItems()
-                 .addAll(loadedFiles.stream()
-                                    .map(File::getName)
-                                    .toList());
+        if(!loadedFiles.isEmpty()) {
+            mediaReferenceList.addAll(loadedFiles);
+            trackList.getItems()
+                    .addAll(loadedFiles.stream()
+                            .map(File::getName)
+                            .toList());
+        }
     }
 
     public void loadSingleFile() {
@@ -147,12 +155,14 @@ public class MusicPlayerController implements Initializable {
         Platform.exit();
     }
 
-    private void loadMedia(int number) {
-        media = new Media(mediaReferenceList.get(number).toURI().toString());
-        mediaPlayer = new MediaPlayer(media);
-        songLabel.setText(mediaReferenceList.get(number).getName());
-        Listeners.mediaSliderListener(mediaSlider, mediaPlayer);
-        Listeners.volumeSliderListener(volumeSlider, mediaPlayer);
+    private void loadMedia(int trackNumber) {
+        if(mediaReferenceList.size()>trackNumber) {
+            media = new Media(mediaReferenceList.get(trackNumber).toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+            songLabel.setText(mediaReferenceList.get(trackNumber).getName());
+            Listeners.mediaSliderListener(mediaSlider, mediaPlayer);
+            Listeners.volumeSliderListener(volumeSlider, mediaPlayer);
+        }
     }
 
     private void setMedia(int number) {
