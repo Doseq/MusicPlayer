@@ -14,7 +14,7 @@ public class FileLoader {
     public static List<File> loadFilesInDirectory() {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Choose folder containing MP3 files");
-        return loadFilesFromDirectory(directoryChooser.showDialog(new Stage())).orElse(Collections.emptyList());
+        return loadFilesFromDirectory(directoryChooser.showDialog(new Stage()));
     }
 
     public static File loadFile() {
@@ -24,13 +24,17 @@ public class FileLoader {
         return fileChooser.showOpenDialog(new Stage());
     }
 
-    private static Optional<List<File>> loadFilesFromDirectory(File directory) {
-        List<File> files = new LinkedList<>(Arrays.asList(directory.listFiles()));
-        for (File loadedFile : files) {
-            int i = loadedFile.getName().lastIndexOf(".");
-            if(!loadedFile.getName().substring(i+1).equals("mp3")) files.remove(loadedFile);
+    private static List<File> loadFilesFromDirectory(File directory) {
+        List<File> files = new ArrayList<>(Arrays.asList(directory.listFiles())); //Must be packaged new ArrayList beacuse of unmodifiable wrapper
+        if(!files.isEmpty()) {
+            Iterator<File> iterator = files.iterator();
+            while(iterator.hasNext()) {
+                File file = iterator.next();
+                int i = file.getName().lastIndexOf(".");
+                if (!file.getName().substring(i + 1).equals("mp3")) iterator.remove();
+            }
         }
-        return Optional.of(files);
+        return files;
     }
 
 
