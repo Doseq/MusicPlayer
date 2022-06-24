@@ -3,6 +3,7 @@ package pl.doseq.musicplayer.util;
 import javafx.scene.control.Slider;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
+import pl.doseq.musicplayer.MusicPlayerController;
 
 public class Listeners {
 
