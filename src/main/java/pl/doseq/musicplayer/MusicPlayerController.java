@@ -47,6 +47,7 @@ public class MusicPlayerController implements Initializable {
 
     private Media media;
     private MediaPlayer mediaPlayer;
+    private static double globalVolume;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {}
@@ -159,6 +160,17 @@ public class MusicPlayerController implements Initializable {
         if(running) cancelTimer();
         loadMedia(number);
         beginTimer();
+        mediaPlayer.setVolume(globalVolume);
         mediaPlayer.play();
+    }
+
+    private void checkIfMediaPresent() {
+        if(mediaReferenceList.isEmpty()) {
+            throw new IllegalStateException("Missing tracks");
+        }
+    }
+
+    public static void setGlobalVolume(double globalVolume) {
+        MusicPlayerController.globalVolume = globalVolume;
     }
 }

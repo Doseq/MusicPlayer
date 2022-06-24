@@ -11,6 +11,7 @@ public class Listeners {
     public static void volumeSliderListener(Slider slider, MediaPlayer player) {
         slider.valueProperty().addListener((observableValue, number, t1) -> {
             player.setVolume(slider.getValue() * 0.01);
+            MusicPlayerController.setGlobalVolume(slider.getValue() * 0.01);
         });
     }
 
