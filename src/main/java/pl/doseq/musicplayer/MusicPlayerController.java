@@ -172,6 +172,7 @@ public class MusicPlayerController implements Initializable {
         loadMedia(number);
         beginTimer();
         mediaPlayer.setVolume(globalVolume);
+        if(isMuted) mediaPlayer.setMute(isMuted);
         mediaPlayer.play();
     }
 
