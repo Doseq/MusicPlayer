@@ -152,7 +152,7 @@ public class MusicPlayerController implements Initializable {
     }
 
     public void exitPlayer() {
-        mediaPlayer.stop();
+        if(mediaPlayer != null) mediaPlayer.stop();
         Platform.exit();
     }
 

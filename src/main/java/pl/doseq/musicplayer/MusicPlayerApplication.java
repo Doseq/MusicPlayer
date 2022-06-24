@@ -15,7 +15,7 @@ public class MusicPlayerApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MusicPlayerApplication.class.getResource("musicPlayer.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("musicPlayer.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 822.0, 394.0, Color.TRANSPARENT);
         scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
         scene.setOnMousePressed(event -> {
